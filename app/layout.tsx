@@ -1,40 +1,38 @@
-import type { Metadata } from "next";
-import { Geist } from "next/font/google";
-import { ThemeProvider } from "next-themes";
-import "./globals.css";
+import './globals.css';
+import { DM_Serif_Display, Lora, JetBrains_Mono } from 'next/font/google';
 
-const defaultUrl = process.env.VERCEL_URL
-  ? `https://${process.env.VERCEL_URL}`
-  : "http://localhost:3000";
-
-export const metadata: Metadata = {
-  metadataBase: new URL(defaultUrl),
-  title: "Next.js and Supabase Starter Kit",
-  description: "The fastest way to build apps with Next.js and Supabase",
-};
-
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  display: "swap",
-  subsets: ["latin"],
+const dmSerif = DM_Serif_Display({
+  weight: ['400'],
+  subsets: ['latin'],
+  variable: '--font-display',
 });
+
+const lora = Lora({
+  weight: ['400', '700'],
+  subsets: ['latin'],
+  variable: '--font-body',
+});
+
+const jetbrains = JetBrains_Mono({
+  weight: ['400', '700'],
+  subsets: ['latin'],
+  variable: '--font-mono',
+});
+
+export const metadata = {
+  title: 'sites4u',
+  description: 'we are a b2b website agency, we build professional websites for SMEs who are still not online, we help with marketing, small family run businesses and smaller independent businesses to rival the big corps',
+};
 
 export default function RootLayout({
   children,
-}: Readonly<{
+}: {
   children: React.ReactNode;
-}>) {
+}) {
   return (
-    <html lang="en" suppressHydrationWarning>
-      <body className={`${geistSans.className} antialiased`}>
-        <ThemeProvider
-          attribute="class"
-          defaultTheme="system"
-          enableSystem
-          disableTransitionOnChange
-        >
-          {children}
-        </ThemeProvider>
+    <html lang="en" className={`${dmSerif.variable} ${lora.variable} ${jetbrains.variable}`}>
+      <body className="bg-[#FBF9F6] text-[#2C1E18] antialiased min-h-screen selection:bg-[#C56A3C]/20 selection:text-[#C56A3C]">
+        {children}
       </body>
     </html>
   );
